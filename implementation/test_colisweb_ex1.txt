@@ -1,0 +1,9 @@
+0 2 # start and end points
+1 2 # stops
+3 3 # nb of points and routes
+0 0.5 10.2 # id lat lon
+1 10.1 10.5
+2 10.5 20.3
+0 1 # route from 0 to 1
+1 2
+2 0
