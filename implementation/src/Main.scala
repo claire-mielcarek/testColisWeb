@@ -1,5 +1,4 @@
-import _root_.api._;
-import scala.io.Source
+import api._
 
 object test {
   def main(args: Array[String]) {
@@ -60,6 +59,7 @@ object test {
     println("Best Path :" + Api.getFinalPath(List(r20, r21, r22, r23, r24, r25, r26), start2, end2, stops2))
     */
 
+    val beginTime = System.currentTimeMillis()
     args.length match {
       case 0 => println("Name of the file missing (with extension)")
       case _ =>
@@ -71,5 +71,7 @@ object test {
           parsing.tail.head.asInstanceOf[Int],
           parsing.tail.tail.head.asInstanceOf[List[Int]]))
     }
+    val diffTime =System.currentTimeMillis() - beginTime
+    println("Time taken : " + diffTime + " ms")
   }
 }

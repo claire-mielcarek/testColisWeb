@@ -26,9 +26,8 @@ object Parser {
   def parseRoute(line: List[String], points: List[Point]): Route =
     List(points.find(p => p.isPointNumber(line.head.toInt)), 
         points.find(p => p.isPointNumber(line.tail.head.toInt))) match{
-    case None:: tail => new Route(new Point(-1,0,0),new Point(-1,0,0))
-    case begin::None::tail => new Route(new Point(-1,0,0),new Point(-1,0,0))
     case Some(begin)::Some(end)::tail => new Route(begin,end)
+    case _ => new Route(new Point(-1,0,0),new Point(-1,0,0))
   }
 
   def parseAux(token: List[Any], step: String, nbPoints: Int, points: List[Point]): List[Any] =
