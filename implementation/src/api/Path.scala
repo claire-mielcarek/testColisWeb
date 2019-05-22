@@ -1,16 +1,33 @@
 package api
 
 class Path(val routes: List[Route]) {
-  def listLength(l: List[Route]): Double =
+
+  override def equals(that: Any): Boolean =
+    that match {
+      case that: Path => that.routes == this.routes
+      case _ => false
+    }
+
+  /**
+   * @return Return the cumulative length of a list of route
+   * @param l : the list of route to use
+   */
+  private[this] def listLength(l: List[Route]): Double =
     l match {
       case Nil => 0
       case x :: tail => x.length + listLength(tail)
       case _ => 0
     }
 
+  /**
+   * @return the length of the path
+   */
   def length: Double = listLength(routes)
 
-  def listToString(l: List[Route]): String =
+  /**
+   * @return a string representing a list of route
+   */
+  private[this] def listToString(l: List[Route]): String =
     l match {
       case Nil => " "
       case x :: Nil => x.begin.toString + " " + x.end.toString
@@ -18,6 +35,11 @@ class Path(val routes: List[Route]) {
     }
   override def toString = listToString(routes)
 
+  /**
+   * @return if a list of route pass through a point
+   * @param routes : list of routes to consider
+   * @param p : id of the point
+   */
   private[this] def containsPointAux(routes: List[Route], p: Int): Boolean =
     routes match {
       case Nil => false
@@ -27,8 +49,16 @@ class Path(val routes: List[Route]) {
           containsPointAux(tail, p)
     }
 
-  def containsPoint(p:Int): Boolean = containsPointAux(routes, p)
+  /**
+   * @return if the path goes through point of id p
+   * @param p : id of the point
+   */
+  def containsPoint(p: Int): Boolean = containsPointAux(routes, p)
 
+  /**
+   * @return if the path goes through a list of point
+   * @param stops : list of the ids of the points
+   */
   def containsStops(stops: List[Int]): Boolean =
     stops match {
       case Nil => true
